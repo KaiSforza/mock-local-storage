@@ -2,25 +2,25 @@
 (function (glob) {
 
     function createStorage() {
-        var s = {},
-            noopCallback = function () {},
+        let s = {},
+            noopCallback = () => {},
             _itemInsertionCallback = noopCallback;
 
         Object.defineProperty(s, 'setItem', {
-            get: function () {
-                return function (k, v) {
+            get: () => {
+                return (k, v) => {
                     k = k + '';
-                    _itemInsertionCallback(this.length);
-                    this[k] = v + '';
+                    _itemInsertionCallback(s.length);
+                    s[k] = v + '';
                 };
             }
         });
         Object.defineProperty(s, 'getItem', {
-            get: function () {
-                return function (k) {
+            get: () => {
+                return k => {
                     k = k + '';
-                    if (this.hasOwnProperty(k)) {
-                        return this[k];
+                    if (s.hasOwnProperty(k)) {
+                        return s[k];
                     } else {
                         return null;
                     }
@@ -28,42 +28,42 @@
             }
         });
         Object.defineProperty(s, 'removeItem', {
-            get: function () {
-                return function (k) {
+            get: () => {
+                return k => {
                     k = k + '';
-                    if (this.hasOwnProperty(k)) {
-                        delete this[k];
+                    if (s.hasOwnProperty(k)) {
+                        delete s[k];
                     }
                 };
             }
         });
         Object.defineProperty(s, 'clear', {
-            get: function () {
-                return function () {
-                    for (var k in this) {
-                        if (this.hasOwnProperty(k)) {
-                            delete this[k];
+            get: () => {
+                return () => {
+                    for (let k in s) {
+                        if (s.hasOwnProperty(k)) {
+                            delete s[k];
                         }
                     }
                 };
             }
         });
         Object.defineProperty(s, 'length', {
-            get: function () {
-                return Object.keys(this).length;
+            get: () => {
+                return Object.keys(s).length;
             }
         });
 	Object.defineProperty(s, "key", {
-	    value: function (k) {
-	        var key = Object.keys(s)[k];
+	    value: k => {
+	        let key = Object.keys(s)[k];
 	        return (!key) ? null : key;
 	    },
 	});
         Object.defineProperty(s, 'itemInsertionCallback', {
-            get: function () {
+            get: () => {
                 return _itemInsertionCallback;
             },
-            set: function (v) {
+            set: v => {
                 if (!v || typeof v != 'function') {
                     v = noopCallback;
                 }
