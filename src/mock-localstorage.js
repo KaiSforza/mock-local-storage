@@ -10,7 +10,9 @@
             get: () => {
                 return (k, v) => {
                     k = k + '';
-                    _itemInsertionCallback(s.length);
+                    if (!s.hasOwnProperty(k)) {
+                        _itemInsertionCallback(s.length);
+                    }
                     s[k] = v + '';
                 };
             }
@@ -53,12 +55,12 @@
                 return Object.keys(s).length;
             }
         });
-	Object.defineProperty(s, "key", {
-	    value: k => {
-	        let key = Object.keys(s)[k];
-	        return (!key) ? null : key;
-	    },
-	});
+        Object.defineProperty(s, "key", {
+            value: k => {
+                let key = Object.keys(s)[k];
+                return (!key) ? null : key;
+            },
+        });
         Object.defineProperty(s, 'itemInsertionCallback', {
             get: () => {
                 return _itemInsertionCallback;
