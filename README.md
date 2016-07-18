@@ -1,6 +1,6 @@
 # mock-local-storage
 
-Mock lodcalStorage for headless unit tests
+Mock localStorage for headless unit tests
 
 Inspired by StackOverflow answers and wrapped into rpm package to be used with mocha.
 
