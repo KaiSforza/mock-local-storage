@@ -1,30 +1,61 @@
 # mock-local-storage
 
-Mock localStorage for headless unit tests
+Mock `localStorage` for headless unit tests
 
-Inspired by StackOverflow answers and wrapped into rpm package to be used with mocha.
+Inspired by StackOverflow answers and wrapped into npm package.
 
 ## Motivation
 
-I need to mock out localStorage to run tests of cache implementation with mocha in console (without browser).
+Used to mock `localStorage` to run headless tests of cache implementation in terminal (ie. without browser).
 
 ## Installation
 
     npm install mock-local-storage --save-dev
 
-## Usage
+## Usage node testing
+
+In a node environment you can mock the `window.localStorage` as follows:
+
+```js
+global.window = {}
+import localStorage from 'mock-local-storage'
+window.localStorage = global.localStorage
+```
+
+This is very useful when you want to run headless tests on code mant for the browser that use `localStorage`
+
+You can even store this in a file that is reused across tests:
+
+`mock-localstorage.js`
+
+```js
+global.window = {}
+import localStorage from 'mock-local-storage'
+window.localStorage = global.localStorage
+```
+
+`using-localstorage.test.js`
+
+```js
+import './mock-localstorage'
+
+// unit tests follow here
+```
+
+
+### Mocha usage example
 
     mocha -r mock-local-storage
-	
-Mocha will require module, which will replace localStorage and sessionStorage on the global object.
 
-There are some caveats with using index operator, though. Browser's localStorage
-works with strings and stringifyes objects stored via localStorage[key] notation,
-but this implementation does not.
+Mocha will require module, which will replace `localStorage` and `sessionStorage` on the `global` object.
+
+There are some caveats with using `index` operator, though. Browser's 
+`localStorage` works with strings and stringifyes objects stored via `localStorage[key]` notation, but this implementation does not.
 
 Additionally, test code can provide a callback to be invoked on item insertion.
-Mock implementation will invoke it when localStorage.setItem() is called
-(but not with localStorage[key] notation).
+Mock implementation will invoke it when `localStorage.setItem()` is called
+(but not with `localStorage[key]` notation).
+
 It can be used to emulate allocation errors, like this:
 
 	describe('test with mock localStorage', () => {
