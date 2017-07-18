@@ -12,7 +12,19 @@ Used to mock `localStorage` to run headless tests of cache implementation in ter
 
     npm install mock-local-storage --save-dev
 
-## Usage node testing
+## Usage
+
+## Mocha
+
+Require in Mocha, which will replace `localStorage` and `sessionStorage` on the `global` and `window` objects:
+
+    mocha --require mock-local-storage
+
+If you are using `jsdom-global`, make sure it is required before `mock-local-storage`:  
+
+    mocha --require jsdom-global --require mock-local-storage
+
+### Other testing frameworks
 
 In a node environment you can mock the `window.localStorage` as follows:
 
@@ -42,14 +54,9 @@ import './mock-localstorage'
 // unit tests follow here
 ```
 
+### Caveats
 
-### Mocha usage example
-
-    mocha -r mock-local-storage
-
-Mocha will require module, which will replace `localStorage` and `sessionStorage` on the `global` object.
-
-There are some caveats with using `index` operator, though. Browser's 
+There are some caveats with using `index` operator. Browser's 
 `localStorage` works with strings and stringifyes objects stored via `localStorage[key]` notation, but this implementation does not.
 
 Additionally, test code can provide a callback to be invoked on item insertion.

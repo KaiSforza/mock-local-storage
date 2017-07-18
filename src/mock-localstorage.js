@@ -1,5 +1,5 @@
 // Mock localStorage 
-(function (glob) {
+(function () {
 
     function createStorage() {
         let s = {},
@@ -75,6 +75,13 @@
         return s;
     }
 
-    glob.localStorage = createStorage();
-    glob.sessionStorage = createStorage();
-}(typeof window !== 'undefined' ? window : global));
+    global.localStorage = createStorage();
+    global.sessionStorage = createStorage();
+    
+    if (typeof window === 'undefined' ) {
+        global.window = {};
+    }
+    
+    window.localStorage = global.localStorage;
+    window.sessionStorage = global.sessionStorage;
+}());
