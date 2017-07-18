@@ -84,4 +84,4 @@
     
     window.localStorage = global.localStorage;
     window.sessionStorage = global.sessionStorage;
-}();
+}());
