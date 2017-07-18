@@ -79,7 +79,7 @@
     global.sessionStorage = createStorage();
     
     if (typeof window === 'undefined' ) {
-        window = {};
+        global.window = {};
     }
     
     window.localStorage = global.localStorage;
