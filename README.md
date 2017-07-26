@@ -14,7 +14,7 @@ Used to mock `localStorage` to run headless tests of cache implementation in ter
 
 ## Usage
 
-## Mocha
+### Mocha
 
 Require in Mocha, which will replace `localStorage` and `sessionStorage` on the `global` and `window` objects:
 
@@ -34,7 +34,7 @@ import localStorage from 'mock-local-storage'
 window.localStorage = global.localStorage
 ```
 
-This is very useful when you want to run headless tests on code mant for the browser that use `localStorage`
+This is very useful when you want to run headless tests on code meant for the browser that use `localStorage`
 
 You can even store this in a file that is reused across tests:
 
@@ -54,12 +54,10 @@ import './mock-localstorage'
 // unit tests follow here
 ```
 
-### Caveats
+### Extra
 
-There are some caveats with using `index` operator. Browser's 
-`localStorage` works with strings and stringifyes objects stored via `localStorage[key]` notation, but this implementation does not.
-
-Additionally, test code can provide a callback to be invoked on item insertion.
+Besides mocking of conventional `localStorage` interface, this implementation provides
+a way for test code to register a callback to be invoked on item insertion.
 Mock implementation will invoke it when `localStorage.setItem()` is called
 (but not with `localStorage[key]` notation).
 
@@ -96,6 +94,14 @@ It can be used to emulate allocation errors, like this:
 	        localStorage.length.should.equal(5);
 	    });
 	});
+
+### Caveats
+
+There are some caveats with using `index` operator. Browser's `localStorage`
+works with strings and stringifyes objects stored via `localStorage[key]` notation,
+but this implementation does not.
+
+`localStorage.itemInsertionCallback` won't be invoked with  `localStorage[key]` notation.
 
 ## Tests
 
