@@ -1,7 +1,7 @@
 {
   "name": "mock-local-storage",
   "version": "1.0.4",
-  "description": "Mock lodcalStorage for headless unit tests",
+  "description": "Mock localStorage for headless unit tests",
   "main": "lib/mock-localstorage.js",
   "scripts": {
     "test": "mocha --compilers js:babel/register",
