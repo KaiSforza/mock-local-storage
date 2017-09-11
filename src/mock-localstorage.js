@@ -1,4 +1,4 @@
-// Mock localStorage 
+// Mock localStorage
 (function () {
 
     function createStorage() {
@@ -75,13 +75,12 @@
         return s;
     }
 
+    const global = require("global")
+    const window = require("global/window")
+
     global.localStorage = createStorage();
     global.sessionStorage = createStorage();
-    
-    if (typeof window === 'undefined' ) {
-        global.window = {};
-    }
-    
+
     window.localStorage = global.localStorage;
     window.sessionStorage = global.sessionStorage;
 }());
