@@ -30,7 +30,7 @@ In a node environment you can mock the `window.localStorage` as follows:
 
 ```js
 global.window = {}
-import localStorage from 'mock-local-storage'
+import 'mock-local-storage'
 window.localStorage = global.localStorage
 ```
 
@@ -42,7 +42,7 @@ You can even store this in a file that is reused across tests:
 
 ```js
 global.window = {}
-import localStorage from 'mock-local-storage'
+import 'mock-local-storage'
 window.localStorage = global.localStorage
 ```
 
