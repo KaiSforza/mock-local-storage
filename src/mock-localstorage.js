@@ -74,13 +74,21 @@
         });
         return s;
     }
-
+    
     const global = require("global")
     const window = require("global/window")
+    
+    Object.defineProperty(global, 'localStorage', {
+      value: createStorage(),
+    });
+    Object.defineProperty(window, 'localStorage', {
+      value: localStorage,
+    });
 
-    global.localStorage = createStorage();
-    global.sessionStorage = createStorage();
-
-    window.localStorage = global.localStorage;
-    window.sessionStorage = global.sessionStorage;
+    Object.defineProperty(global, 'sessionStorage', {
+      value: createStorage(),
+    });
+    Object.defineProperty(window, 'sessionStorage', {
+      value: sessionStorage,
+    });
 }());
