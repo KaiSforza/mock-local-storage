@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/letsrock-today/mock-local-storage.svg?branch=master)](https://travis-ci.com/letsrock-today/mock-local-storage)
+
 # mock-local-storage
 
 Mock `localStorage` for headless unit tests
