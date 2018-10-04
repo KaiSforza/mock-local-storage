@@ -82,13 +82,13 @@
       value: createStorage(),
     });
     Object.defineProperty(window, 'localStorage', {
-      value: localStorage,
+      value: global.localStorage,
     });
 
     Object.defineProperty(global, 'sessionStorage', {
       value: createStorage(),
     });
     Object.defineProperty(window, 'sessionStorage', {
-      value: sessionStorage,
+      value: global.sessionStorage,
     });
 }());
