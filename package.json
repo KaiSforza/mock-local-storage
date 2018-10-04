@@ -4,9 +4,9 @@
   "description": "Mock localStorage for headless unit tests",
   "main": "lib/mock-localstorage.js",
   "scripts": {
-    "test": "mocha --compilers js:babel/register",
+    "test": "mocha --require @babel/register",
     "compile": "babel -d lib/ src/",
-    "prepublish": "npm run compile"
+    "prepare": "npm run compile"
   },
   "repository": {
     "type": "git",
@@ -27,10 +27,12 @@
   },
   "homepage": "https://github.com/letsrock-today/mock-local-storage",
   "devDependencies": {
-    "babel": "^5.0.9",
-    "babel-core": "^5.1.8",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
     "chai": "^2.2.0",
-    "mocha": "^2.2.1"
+    "mocha": "^5.2.0"
   },
   "dependencies": {
     "core-js": "^0.8.3",
