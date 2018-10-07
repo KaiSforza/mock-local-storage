@@ -109,6 +109,15 @@ but this implementation does not.
 
     npm install
     npm test
+    
+## Bugs, issues, PRs, participation, contribution
+
+Please feel free to send us occusionall PRs along with unit tests,
+we'll merge them if they successfully build and pass unit tests.
+Consider to always provide unit tests, illustrating your problem, along with PR to avoid future regression.
+
+Note, that we currently do not use this project ourselves and cannot afford to invest much time into it.
+Please serve yourself.
 
 ## License
 
