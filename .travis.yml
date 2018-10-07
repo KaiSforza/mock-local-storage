@@ -1,14 +1,12 @@
 language: node_js
 node_js:
-- '7'
-dist: trusty
-sudo: required
-addons:
-  chrome: stable
+  - '7'
 cache:
   directories:
-  - node_modules
+    - node_modules
 deploy:
+  skip_cleanup: true
+  tag: next
   provider: npm
   email: tnl.disposal.box+npmjs@gmail.com
   api_key:
@@ -16,4 +14,3 @@ deploy:
   on:
     # tags: true # seams to conflict with `tag: next`
     repo: letsrock-today/mock-local-storage
-  tag: next
