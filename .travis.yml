@@ -11,7 +11,7 @@ before_install:
 after_success:
     - >
         [ "$TRAVIS_TAG" == "" ]
-        && [[ "$TRAVIS_COMMIT_MESSAGE" == *"Travis"* ]]
+        && [[ "$TRAVIS_COMMIT_MESSAGE" != *"Travis"* ]]
         && git checkout master
         && npm version patch -m "%s [Travis]"
         && eval "$(ssh-agent -s)"
