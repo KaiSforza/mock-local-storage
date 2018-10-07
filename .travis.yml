@@ -9,7 +9,7 @@ before_install:
     -in id_rsa_travis.enc -out id_rsa_travis -d
   - chmod 600 id_rsa_travis
 after_success:
-  - '[ "$TRAVIS_TAG" == "" ] && npm version patch && ssh-agent $(ssh-add id_rsa_travis && git push --tags)'
+  - '[ "$TRAVIS_TAG" == "" ] && npm version patch && eval "$(ssh-agent -s)" && ssh-add id_rsa_travis && git push --tags'
 deploy:
   skip_cleanup: true
   provider: npm
