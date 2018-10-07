@@ -14,6 +14,6 @@ deploy:
   api_key:
     secure: Sby9RxQZE9LfbaQOS/Lj+EbZnocLqciUwBWmQYZaXDMKFQqGps+mmRausV99mk9xbCIqVOuOOd4Co2QhGOzCSvKOD1mHZugsrffIetlYBwNkcgFfFy69RNvFidvyzgAc9kItVYduxYJMZ2ux6PFUPa+glWbCZKTfM9GhWuwFfyo8QNpsSfrsCce/5Wasp69ostihJnHoK3BuPgtx76uJbbcgmB+bfc7rqb+7Ey8X+GpcsMVGSgz7l8YixV9rOQN+JgDMYlvzLiXljiYfFFwWALlZmkUpXI9fit2PQKPeLTDxMg5jdAm7+eYlh1yomWmWIONXGUD4XhCOLuZncYlUhVOYNmBx114AAD5wmy0tmcbN+v/o8J9PVWD7p37ixaNJLT8R0R2ZpIChOV0YOIKXrzNtgklUDYN+L6ZSXEfT7YEjs2E+f1kxI6OKvttSL4XB4hPnKgE3HLdMlZwwpfQrVe3eMCNtWXjGa8lKU9/DkFl5VCzhzvOxT0ZeQBLZeE3CcGn8TPNLFXTY83eh8Vl2OEsp8eRW5Knbv8+D8OiMOqhhTuZgrvUHsL7a1WUuM6+VHNaTUp4Y7v/k8I7mP1e2EiqSZYiDPnNS53jn6DVCzcxiPiFw/PKhnhAeuyy9hx0vW/OmitOJXE4k/TY4MwMnUVFfusOIZ54iQtti9nwFAJ4=
   on:
-    tags: true
+    # tags: true # seams to conflict with `tag: next`
     repo: letsrock-today/mock-local-storage
   tag: next
