@@ -4,6 +4,7 @@ node_js:
 cache:
   directories:
     - node_modules
+after_success: npm version patch
 deploy:
   skip_cleanup: true
   provider: npm
