@@ -12,9 +12,7 @@ after_success:
     - >
         [ "$TRAVIS_TAG" == "" ]
         && git checkout master
-        && npm version patch
-        && OLD_MSG=$(git log --format=%B -n1)
-        && git commit --amend -m "$OLD_MSG [ci skip]"
+        && npm version patch -m "%s [ci skip]"
         && eval "$(ssh-agent -s)"
         && ssh-add id_rsa_travis
         && git push --follow-tags git@github.com:letsrock-today/mock-local-storage.git HEAD:master
