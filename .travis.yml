@@ -14,10 +14,10 @@ after_success:
         && git checkout master
         && npm version patch
         && OLD_MSG=$(git log --format=%B -n1)
-        && git commit --amend -m"$OLD_MSG [ci skip]"
+        && git commit --amend -m "$OLD_MSG [ci skip]"
         && eval "$(ssh-agent -s)"
         && ssh-add id_rsa_travis
-        && git push --follow-tags git@github.com:letsrock-today/mock-local-storage.git HEAD:master'
+        && git push --follow-tags git@github.com:letsrock-today/mock-local-storage.git HEAD:master
 deploy:
   skip_cleanup: true
   provider: npm
