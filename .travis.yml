@@ -1,15 +1,21 @@
 language: node_js
 node_js:
-    - "node"
+  - node
 cache:
   directories:
     - node_modules
-after_success: npm version patch
+before_install:
+  - openssl aes-256-cbc -K $encrypted_e3f7a195a1ba_key -iv $encrypted_e3f7a195a1ba_iv
+    -in id_rsa_travis.enc -out id_rsa_travis -d
+  - chmod 600 id_rsa_travis
+after_success:
+  - eval "$(ssh-agent -s)" && ssh-add id_rsa_travis
+  - '[ "$TRAVIS_TAG" == "" ] && npm version patch && git push --tags'
 deploy:
   skip_cleanup: true
   provider: npm
   email: tnl.disposal.box+npmjs@gmail.com
-  api_key: $NPM_TOKEN
+  api_key: "$NPM_TOKEN"
   on:
     tags: true
     repo: letsrock-today/mock-local-storage
