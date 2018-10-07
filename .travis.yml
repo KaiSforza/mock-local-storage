@@ -11,8 +11,9 @@ before_install:
 after_success:
     - >
         [ "$TRAVIS_TAG" == "" ]
+        && [[ "$TRAVIS_COMMIT_MESSAGE" == *"Travis"* ]]
         && git checkout master
-        && npm version patch -m "%s [ci skip]"
+        && npm version patch -m "%s [Travis]"
         && eval "$(ssh-agent -s)"
         && ssh-add id_rsa_travis
         && git push --follow-tags git@github.com:letsrock-today/mock-local-storage.git HEAD:master
