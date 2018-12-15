@@ -7,11 +7,11 @@ cache:
 before_install:
   - >
       openssl aes-256-cbc
-       -K $encrypted_e3f7a195a1ba_key
-       -iv $encrypted_e3f7a195a1ba_iv
-       -in id_rsa_travis.enc
-       -out /tmp/id_rsa_travis
-       -d
+      -K $encrypted_e3f7a195a1ba_key
+      -iv $encrypted_e3f7a195a1ba_iv
+      -in id_rsa_travis.enc
+      -out /tmp/id_rsa_travis
+      -d
   - chmod 600 /tmp/id_rsa_travis
 after_success:
     - >
