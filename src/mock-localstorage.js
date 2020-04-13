@@ -74,10 +74,17 @@
         });
         return s;
     }
-    
+
     const global = require("global")
     const window = require("global/window")
-    
+
+    Object.defineProperty(global, 'Storage', {
+      value: createStorage,
+    });
+    Object.defineProperty(window, 'Storage', {
+      value: createStorage,
+    });
+
     Object.defineProperty(global, 'localStorage', {
       value: createStorage(),
     });
