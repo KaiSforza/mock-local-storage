@@ -2,13 +2,17 @@
 (function () {
 
     function createStorage() {
+        let UNSET = Symbol();
         let s = {},
             noopCallback = () => {},
             _itemInsertionCallback = noopCallback;
 
         Object.defineProperty(s, 'setItem', {
             get: () => {
-                return (k, v) => {
+                return (k, v = UNSET) => {
+                    if (v === UNSET) {
+                        throw new TypeError(`Failed to execute 'setItem' on 'Storage': 2 arguments required, but only 1 present.`);
+                    }
                     k = k + '';
                     if (!s.hasOwnProperty(k)) {
                         _itemInsertionCallback(s.length);
