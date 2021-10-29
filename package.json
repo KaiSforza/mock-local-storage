@@ -37,7 +37,7 @@
     "mocha": "^8.2.1"
   },
   "dependencies": {
-    "core-js": "^0.8.3",
+    "core-js": "^3.19.0",
     "global": "^4.3.2"
   }
 }
