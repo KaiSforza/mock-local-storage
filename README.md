@@ -6,6 +6,20 @@ Mock `localStorage` for headless unit tests
 
 Inspired by StackOverflow answers and wrapped into npm package.
 
+## Deprecation notice
+
+I'm archiving this repository because I have no time to support it myself.
+
+There is a Travic CI script in the repo, which used to work - build
+tags and releases when I reviewed and merged PRs, but I've just noticed
+that it stopped to work.
+
+Travis now urges me to choose a payment plan and provide a credit card
+info to continue builds even for open-source project, which I'm not ready to do.
+
+If anyone wants to maintain this project, you are welcome - you should be able
+to make a fork of archived project.
+
 ## Motivation
 
 Used to mock `localStorage` to run headless tests of cache implementation in terminal (ie. without browser).
