@@ -1,4 +1,5 @@
-[![Build Status](https://gitlab.com/kaictl/node/mock-local-storage/badges/master/pipeline.svg)](https://gitlab.com/kaictl/node/mock-local-storage/-/commits/master)
+[![Build Status](https://gitlab.com/kaictl/node/mock-local-storage/badges/master/pipeline.svg)](https://gitlab.com/kaictl/node/mock-local-storage/)
+[![Code Coverage](https://gitlab.com/kaictl/node/mock-local-storage/badges/master/coverage.svg?job=test)](https://gitlab.com/kaictl/node/mock-local-storage/)
 
 # mock-local-storage
 
