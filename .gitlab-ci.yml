@@ -4,7 +4,7 @@ include:
   - template: Security/Secret-Detection.gitlab-ci.yml
 
 variables:
-  SAST_EXCLUDED_PATHS: 'spec, test, tests, tmp, lib'
+  SAST_EXCLUDED_PATHS: 'spec, test, tests, tmp, lib, node_modules'
 
 .nodestuff: &nodestuff
   image: node:lts-alpine
