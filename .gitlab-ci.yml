@@ -37,22 +37,50 @@ test:
       junit: test-results.xml
   <<: *nodestuff
 
+.pubCheck: &pubCheck
+  # Compare the versions in git and in node to verify that they are the same
+  - |
+    NODE_VERSION=$(node -e "r=require('./package.json');console.log(r.version);")
+    GIT_VERSION=$(echo $CI_COMMIT_TAG | sed 's/^v//')
+    if [ $NODE_VERSION -eq $GIT_VERSION ] {
+      echo "Versions match. Continuing."
+    } else {
+      echo "Error, versions do not match."
+      exit 3
+    }
 publish:
+  <<: *nodestuff
   stage: deploy
   needs:
     - install
     - test
-    - eslint-sast
-    - nodejs-scan-sast
-    - semgrep-sast
-    - gemnasium-dependency_scanning
-    - retire-js-dependency_scanning
-    - secret_detection
   rules:
     - if: $CI_COMMIT_TAG
+  before_script: *pubCheck
   script:
-    - cat "//registry.npmjs.org/:_authToken=$VAR_NPM_AUTHTOKEN" > ~/.npmrc
-    - npm publish
-  <<: *nodestuff
+    - echo "//registry.npmjs.org/:_authToken=$VAR_NPM_AUTHTOKEN" > ~/.npmrc
+    - npm publish || echo "This failed but thats okay."
+  environment:
+    name: npmjs
+    url: https://www.npmjs.com/package/$CI_PROJECT_NAME
 
+publish_gitlab:
+  <<: *nodestuff
+  stage: deploy
+  needs:
+    - install
+    - test
+  rules:
+    - if: $CI_COMMIT_TAG
+  before_script: *pubCheck
+  script:
+    - |
+      echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/npm/" > ~/.npmrc
+      echo "${CI_API_V4_URL#https?}/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=\${CI_JOB_TOKEN}" >> ~/.npmrc
+    - |
+      sed -i 's/\("name": \)"\(mock-local-storage\)"/\1"@kaictl\/\2"/' package.json
+    - npm publish
+  environment:
+    name: gitlab-npm
+    url: $CI_PROJECT_URL/-/packages?type=npm&orderBy=name&sort=desc&search[]=
 
