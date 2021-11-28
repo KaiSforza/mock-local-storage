@@ -42,12 +42,13 @@ test:
   - |
     NODE_VERSION=$(node -e "r=require('./package.json');console.log(r.version);")
     GIT_VERSION=$(echo $CI_COMMIT_TAG | sed 's/^v//')
-    if [ $NODE_VERSION -eq $GIT_VERSION ] {
+    if [ "$NODE_VERSION" == "$GIT_VERSION" ]; then
       echo "Versions match. Continuing."
-    } else {
+    else
       echo "Error, versions do not match."
       exit 3
-    }
+    fi
+
 publish:
   <<: *nodestuff
   stage: deploy
