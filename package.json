@@ -23,10 +23,14 @@
     "headless"
   ],
   "contributors": [
-    {"name": "Nikolay Turpitko"},
-    {"name": "Kai Giokas",
-     "email": "kai@kaictl.me",
-     "url": "https://gitlab.com/kaictl"}
+    {
+      "name": "Nikolay Turpitko"
+    },
+    {
+      "name": "Kai Giokas",
+      "email": "kai@kaictl.me",
+      "url": "https://gitlab.com/kaictl"
+    }
   ],
   "license": "MIT",
   "bugs": {
@@ -39,7 +43,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/register": "^7.0.0",
     "chai": "^2.2.0",
-    "mocha": "^8.2.1",
+    "mocha": "^9.1.3",
     "mocha-junit-reporter": "^2.0.2"
   },
   "dependencies": {
