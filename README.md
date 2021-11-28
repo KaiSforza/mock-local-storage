@@ -8,10 +8,10 @@ Inspired by StackOverflow answers and wrapped into npm package.
 
 ## Moving Notice
 
-This package has moved from the [letsrock-today](lrt) repository into
-[KaiSforza's GitLab repository.](glab)
+This package has moved from the [letsrock-today][lrt] repository into
+[KaiSforza's GitLab repository.][glab]
 
-There is a [copy](copy) of the code in Github, as well, but issues and pull
+There is a [copy][copy] of the code in Github, as well, but issues and pull
 requests will only be watched in Gitlab.
 
 [lrt]: https://github.com/letsrock-today/mock-local-storage
