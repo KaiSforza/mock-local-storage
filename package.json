@@ -1,6 +1,6 @@
 {
   "name": "mock-local-storage",
-  "version": "1.1.17",
+  "version": "1.1.18",
   "description": "Mock localStorage for headless unit tests",
   "main": "lib/mock-localstorage.js",
   "module": "src/mock-localstorage.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/letsrock-today/mock-local-storage.git"
+    "url": "https://gitlab.com/kaictl/node/mock-local-storage"
   },
   "keywords": [
     "localstorage",
@@ -22,19 +22,25 @@
     "mocha",
     "headless"
   ],
-  "author": "Nikolay Turpitko",
+  "contributors": [
+    {"name": "Nikolay Turpitko"},
+    {"name": "Kai Giokas",
+     "email": "kai@kaictl.me",
+     "url": "https://gitlab.com/kaictl"}
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/letsrock-today/mock-local-storage/issues"
+    "url": "https://gitlab.com/kaictl/node/mock-local-storage/issues"
   },
-  "homepage": "https://github.com/letsrock-today/mock-local-storage",
+  "homepage": "https://gitlab.com/kaictl/node/mock-local-storage",
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "@babel/register": "^7.0.0",
     "chai": "^2.2.0",
-    "mocha": "^8.2.1"
+    "mocha": "^8.2.1",
+    "mocha-junit-reporter": "^2.0.2"
   },
   "dependencies": {
     "core-js": "^3.19.0",

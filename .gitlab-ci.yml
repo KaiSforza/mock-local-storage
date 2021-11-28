@@ -1,0 +1,41 @@
+default:
+  image: node:lts-alpine
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+
+install:
+  stage: build
+  script:
+    - npm install
+    - npm pack
+  artifacts:
+    paths:
+      - ./lib/*.js
+      - ./*.tgz
+
+test:
+  stage: test
+  needs:
+    - install
+  script:
+    - npm run test -- --reporter mocha-junit-reporter
+  artifacts:
+    reports:
+      junit: test-results.xml
+
+publish:
+  stage: deploy
+  needs:
+    - install
+    - test
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - cat "//registry.npmjs.org/:_authToken=$VAR_NPM_AUTHTOKEN" > ~/.npmrc
+    - npm publish
+
+
