@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/letsrock-today/mock-local-storage.svg?branch=master)](https://travis-ci.com/letsrock-today/mock-local-storage)
+[![Build Status](https://gitlab.com/kaictl/node/mock-local-storage/badges/master/pipeline.svg)](https://gitlab.com/kaictl/node/mock-local-storage/-/commits/master)
 
 # mock-local-storage
 
@@ -6,19 +6,17 @@ Mock `localStorage` for headless unit tests
 
 Inspired by StackOverflow answers and wrapped into npm package.
 
-## Deprecation notice
+## Moving Notice
 
-I'm archiving this repository because I have no time to support it myself.
+This package has moved from the [letsrock-today](lrt) repository into
+[KaiSforza's GitLab repository.](glab)
 
-There is a Travic CI script in the repo, which used to work - build
-tags and releases when I reviewed and merged PRs, but I've just noticed
-that it stopped to work.
+There is a [copy](copy) of the code in Github, as well, but issues and pull
+requests will only be watched in Gitlab.
 
-Travis now urges me to choose a payment plan and provide a credit card
-info to continue builds even for open-source project, which I'm not ready to do.
-
-If anyone wants to maintain this project, you are welcome - you should be able
-to make a fork of archived project.
+[lrt]: https://github.com/letsrock-today/mock-local-storage
+[glab]: https://gitlab.com/kaictl/node/mock-local-storage
+[copy]: https://github.com/KaiSforza/mock-local-storage
 
 ## Motivation
 
@@ -125,15 +123,12 @@ but this implementation does not.
     npm install
     npm test
     
-## Bugs, issues, PRs, participation, contribution
+## Bugs, issues, MRs, participation, contribution
 
-Please feel free to send us occusionall PRs along with unit tests,
+Please feel free to send us occusionall MRs along with unit tests,
 we'll merge them if they successfully build and pass unit tests.
 Consider to always provide unit tests, illustrating your problem, along with PR to avoid future regression.
 
-Note, that we currently do not use this project ourselves and cannot afford to invest much time into it.
-Please serve yourself.
-
 ## License
 
-[MIT](https://github.com/letsrock-today/mock-local-storage/blob/master/LICENSE)
+[MIT](https://gitlab.com/kaictl/node/mock-local-storage/-/blob/master/LICENSE)
