@@ -34,6 +34,10 @@ describe('# localStorage', () => {
             localStorage.setItem('length', 42);
         }).to.throw(TypeError);
     });
+    it('get and set fail', () => {
+        (function() {localStorage.setItem('setItem');})
+            .should.throw()
+    });
     it('[]', () => {
         localStorage.length.should.equal(0);
         //don't know how to implement:
@@ -97,13 +101,14 @@ describe('# localStorage', () => {
     });
     it('insertion callback', () => {
         localStorage.length.should.equal(0);
-        localStorage.itemInsertionCallback = (len) => {
+        let f = (len) => {
             if (len >= 5) {
                 let err = new Error('Mock localStorage quota exceeded');
                 err.code = 22;
                 throw err;
             }
-        };
+        }
+        localStorage.itemInsertionCallback = f
         let handled = false;
         try {
             for (let i = 0; i < 10; ++i) {
@@ -117,5 +122,6 @@ describe('# localStorage', () => {
         }
         handled.should.be.true;
         localStorage.length.should.equal(5);
+        localStorage.itemInsertionCallback.should.equal(f);
     });
 });
