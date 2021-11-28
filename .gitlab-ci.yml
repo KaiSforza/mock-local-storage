@@ -2,6 +2,7 @@ include:
   - template: Security/Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
+  - template: Security/License-Scanning.gitlab-ci.yml
 
 variables:
   SAST_EXCLUDED_PATHS: 'spec, test, tests, tmp, lib, node_modules'
@@ -32,9 +33,11 @@ test:
     - install
   script:
     - npm run test -- --reporter mocha-junit-reporter
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   artifacts:
     reports:
       junit: test-results.xml
+      cobertura: coverage/cobertura-coverage.xml
   <<: *nodestuff
 
 .pubCheck: &pubCheck

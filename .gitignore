@@ -6,6 +6,8 @@ logs
 lib/
 # Mocha test results
 test-results.xml
+coverage/
+.nyc_output/
 # npm pack output
 *.tgz
 
