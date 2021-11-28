@@ -3,7 +3,10 @@ include:
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
 
-default:
+variables:
+  SAST_EXCLUDED_PATHS: 'spec, test, tests, tmp, lib'
+
+.nodestuff: &nodestuff
   image: node:lts-alpine
   cache:
     key:
@@ -21,6 +24,7 @@ install:
     paths:
       - ./lib/*.js
       - ./*.tgz
+  <<: *nodestuff
 
 test:
   stage: test
@@ -31,6 +35,7 @@ test:
   artifacts:
     reports:
       junit: test-results.xml
+  <<: *nodestuff
 
 publish:
   stage: deploy
@@ -48,5 +53,6 @@ publish:
   script:
     - cat "//registry.npmjs.org/:_authToken=$VAR_NPM_AUTHTOKEN" > ~/.npmrc
     - npm publish
+  <<: *nodestuff
 
 
