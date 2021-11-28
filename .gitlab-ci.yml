@@ -37,6 +37,12 @@ publish:
   needs:
     - install
     - test
+    - eslint-sast
+    - nodejs-scan-sast
+    - semgrep-sast
+    - gemnasium-dependency_scanning
+    - retire-js-dependency_scanning
+    - secret_detection
   rules:
     - if: $CI_COMMIT_TAG
   script:
