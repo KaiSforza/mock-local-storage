@@ -50,5 +50,10 @@
   "dependencies": {
     "core-js": "^3.19.0",
     "global": "^4.3.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
   }
 }
