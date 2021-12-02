@@ -3,9 +3,9 @@
 
     function createStorage() {
         let UNSET = Symbol();
-        let s = {},
-            noopCallback = () => {},
-            _itemInsertionCallback = noopCallback;
+        let s = {};
+        let noopCallback = () => {};
+        let _itemInsertionCallback = noopCallback;
 
         Object.defineProperty(s, 'setItem', {
             get: () => {
@@ -13,58 +13,59 @@
                     if (v === UNSET) {
                         throw new TypeError(`Failed to execute 'setItem' on 'Storage': 2 arguments required, but only 1 present.`);
                     }
-                    k = k + '';
-                    if (!s.hasOwnProperty(k)) {
+                    if (!s.hasOwnProperty(String(k))) {
                         _itemInsertionCallback(s.length);
                     }
-                    s[k] = v + '';
+                    s[String(k)] = String(v);
                 };
             }
         });
+
         Object.defineProperty(s, 'getItem', {
             get: () => {
                 return k => {
-                    k = k + '';
-                    if (s.hasOwnProperty(k)) {
-                        return s[k];
+                    if (s.hasOwnProperty(String(k))) {
+                        return s[String(k)];
                     } else {
                         return null;
                     }
                 };
             }
         });
+
         Object.defineProperty(s, 'removeItem', {
             get: () => {
                 return k => {
-                    k = k + '';
-                    if (s.hasOwnProperty(k)) {
-                        delete s[k];
+                    if (s.hasOwnProperty(String(k))) {
+                        delete s[String(k)];
                     }
                 };
             }
         });
+
         Object.defineProperty(s, 'clear', {
             get: () => {
                 return () => {
                     for (let k in s) {
-                        if (s.hasOwnProperty(k)) {
-                            delete s[k];
-                        }
+                        delete s[String(k)];
                     }
                 };
             }
         });
+
         Object.defineProperty(s, 'length', {
             get: () => {
                 return Object.keys(s).length;
             }
         });
+
         Object.defineProperty(s, "key", {
             value: k => {
-                let key = Object.keys(s)[k];
+                let key = Object.keys(s)[String(k)];
                 return (!key) ? null : key;
             },
         });
+
         Object.defineProperty(s, 'itemInsertionCallback', {
             get: () => {
                 return _itemInsertionCallback;
@@ -76,6 +77,7 @@
                 _itemInsertionCallback = v;
             }
         });
+
         return s;
     }
 

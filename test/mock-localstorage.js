@@ -1,7 +1,5 @@
-import chai from 'chai';
+import { expect } from 'chai';
 import storage from '../src/mock-localstorage';
-
-let should = chai.should();
 
 describe('# localStorage', () => {
     beforeEach(() => {
@@ -12,82 +10,85 @@ describe('# localStorage', () => {
         localStorage.itemInsertionCallback = null;
     });
     it('len', () => {
-        localStorage.length.should.equal(0);
+        expect(localStorage.length).to.equal(0);
         localStorage.setItem(42, 42);
-        localStorage.length.should.equal(1);
+        expect(localStorage.length).to.equal(1);
         for (let i = 0; i < 100; ++i) {
             localStorage.setItem(i, i);
         }
-        localStorage.length.should.equal(100);
+        expect(localStorage.length).to.equal(100);
     });
     it('get and set', () => {
-        localStorage.length.should.equal(0);
-        should.equal(localStorage.getItem(42), null);
+        expect(localStorage.length).to.equal(0);
+        expect(localStorage.getItem(42)).to.be.null;
         for (let i = 0; i < 100; ++i) {
             localStorage.setItem(i, i);
         }
-        localStorage.getItem(42).should.equal('42');
-        chai.expect(function () {
+        expect(localStorage.getItem(42)).to.equal('42');
+        expect(function () {
             localStorage.setItem('setItem', 42);
         }).to.throw(TypeError);
-        chai.expect(function () {
+        expect(function () {
             localStorage.setItem('length', 42);
         }).to.throw(TypeError);
     });
     it('get and set fail', () => {
-        (function() {localStorage.setItem('setItem');})
-            .should.throw()
+        expect(function() {localStorage.setItem('setItem');})
+            .to.throw(TypeError)
     });
     it('[]', () => {
-        localStorage.length.should.equal(0);
+        expect(localStorage.length).to.equal(0);
         //don't know how to implement:
         //should.equal(localStorage['42'], null);
-        should.not.exist(localStorage['42']);
+        expect(localStorage['42']).to.not.exist;
         for (let i = 0; i < 100; ++i) {
             localStorage[i + ''] = i + '';
         }
-        localStorage.length.should.equal(100);
-        localStorage[42].should.equal('42');
-        chai.expect(function () {
+        expect(localStorage.length).to.equal(100);
+        expect(localStorage[42]).to.equal('42');
+        expect(function () {
             localStorage['setItem'] = '42';
         }).to.throw(TypeError);
-        chai.expect(function () {
+        expect(function () {
             localStorage['length'] = 42;
         }).to.throw(TypeError);
-        chai.expect(function () {
+        expect(function () {
             localStorage.setItem = '42';
         }).to.throw(TypeError);
-        chai.expect(function () {
+        expect(function () {
             localStorage.length = 42;
         }).to.throw(TypeError);
         //don't know how to implement:
         //localStorage[17] = 77;
         //localStorage[17].should.equal('77');
         localStorage[15] = '55';
-        localStorage[15].should.equal('55');
-        localStorage['15'].should.equal('55');
-        localStorage.length.should.equal(100);
+        expect(localStorage[15]).to.equal('55');
+        expect(localStorage['15']).to.equal('55');
+        expect(localStorage.length).to.equal(100);
     });
     it('iterate', () => {
-        localStorage.length.should.equal(0);
+        expect(localStorage.length).to.equal(0);
         for (let i = 0; i < 100; ++i) {
             localStorage.setItem(i, i);
         }
         let i = 0;
         for (let k in localStorage) {
-            localStorage.getItem(localStorage.key(k)).should.equal(i + '');
+            expect(localStorage.getItem(localStorage.key(k))).to.equal(i + '');
             ++i;
         }
     });
     it('remove and clear', () => {
-        localStorage.length.should.equal(0);
+        expect(localStorage.length).to.equal(0);
+        localStorage.removeItem(0); // Test removing nonexistent
+        expect(localStorage.length).to.equal(0);
         for (let i = 0; i < 100; ++i) {
             localStorage.setItem(i, i);
         }
-        localStorage.length.should.equal(100);
+        localStorage.removeItem('a'); // Test removing nonexistent
+        expect(localStorage.length).to.equal(100);
         localStorage.removeItem(42);
-        should.equal(localStorage.getItem(42), null);
-        localStorage.length.should.equal(99);
+        expect(localStorage.getItem(42)).to.be.null;
+        expect(localStorage.length).to.equal(99);
         for (let i = 0; i < 10;) {
             let k = Math.trunc(Math.random() * 100);
             if (localStorage.getItem(k)) {
@@ -95,12 +96,12 @@ describe('# localStorage', () => {
             }
             localStorage.removeItem(k);
         }
-        localStorage.length.should.equal(89);
+        expect(localStorage.length).to.equal(89);
         localStorage.clear();
-        localStorage.length.should.equal(0);
+        expect(localStorage.length).to.equal(0);
     });
     it('insertion callback', () => {
-        localStorage.length.should.equal(0);
+        expect(localStorage.length).to.equal(0);
         let f = (len) => {
             if (len >= 5) {
                 let err = new Error('Mock localStorage quota exceeded');
@@ -120,8 +121,16 @@ describe('# localStorage', () => {
                 handled = true;
             }
         }
-        handled.should.be.true;
-        localStorage.length.should.equal(5);
-        localStorage.itemInsertionCallback.should.equal(f);
+        expect(handled).to.be.true;
+        expect(localStorage.length).to.equal(5);
+        expect(localStorage.itemInsertionCallback).to.equal(f);
     });
+    it('key', () => {
+        expect(localStorage.length).to.equal(0);
+        for (let i = 0; i < 100; ++i) {
+            localStorage.setItem(i, i);
+        }
+        expect(localStorage.key(0)).to.equal('0');
+        expect(localStorage.key('a')).to.be.null;
+    })
 });
