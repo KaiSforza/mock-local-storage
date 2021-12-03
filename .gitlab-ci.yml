@@ -8,7 +8,7 @@ variables:
   SAST_EXCLUDED_PATHS: 'spec, test, tests, tmp, lib, node_modules'
 
 .nodestuff: &nodestuff
-  image: node:lts-alpine
+  image: ${CI_DEP_PREFIX}node:lts-alpine
   cache:
     key:
       files:
@@ -51,6 +51,7 @@ test:
       echo "Error, versions do not match."
       exit 3
     fi
+  - echo "CI_COMMIT_SHORT_TAG=$NODE_VERSION" > dotenv
 
 publish:
   <<: *nodestuff
@@ -67,6 +68,9 @@ publish:
   environment:
     name: npmjs
     url: https://www.npmjs.com/package/$CI_PROJECT_NAME
+  artifacts:
+    reports:
+      dotenv: './dotenv'
 
 publish_gitlab:
   <<: *nodestuff
@@ -88,3 +92,23 @@ publish_gitlab:
     name: gitlab-npm
     url: $CI_PROJECT_URL/-/packages?type=npm&orderBy=name&sort=desc&search[]=
 
+release:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  needs:
+    - publish
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - echo "Creating the release at $CI_COMMIT_TAG"
+  release:
+    name: "mock-local-storage $CI_COMMIT_TAG"
+    tag_name: $CI_COMMIT_TAG
+    ref: $CI_COMMIT_TAG
+    description: "Automated release for mock-local-storage at $CI_COMMIT_TAG"
+    milestones:
+      - $CI_COMMIT_TAG
+    assets:
+      links:
+        - name: mock-local-storage@$CI_COMMIT_TAG
+          url: https://www.npmjs.com/package/$CI_PROJECT_NAME/v/$CI_SHORT_VERSION
