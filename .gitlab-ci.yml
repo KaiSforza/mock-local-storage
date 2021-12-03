@@ -51,7 +51,7 @@ test:
       echo "Error, versions do not match."
       exit 3
     fi
-  - echo "CI_COMMIT_SHORT_TAG=$NODE_VERSION" > dotenv
+  - echo "CI_SHORT_VERSION=$NODE_VERSION" > dotenv
 
 publish:
   <<: *nodestuff
