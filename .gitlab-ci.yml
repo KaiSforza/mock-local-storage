@@ -86,7 +86,7 @@ publish_gitlab:
       echo "@${CI_PROJECT_ROOT_NAMESPACE}:registry=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/npm/" > ~/.npmrc
       echo "${CI_API_V4_URL#https?}/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=\${CI_JOB_TOKEN}" >> ~/.npmrc
     - |
-      sed -i 's/\("name": \)"\(mock-local-storage\)"/\1"@kaictl\/\2"/' package.json
+      sed -i "s/\(^  \"name\": \)\"\($CI_PROJECT_NAME\)\"/\1\"@$CI_PROJECT_ROOT_NAMESPACE\/\2\"/" package.json
     - npm publish
   environment:
     name: gitlab-npm
