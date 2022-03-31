@@ -54,6 +54,10 @@
     "core-js": "^3.19.0",
     "global": "^4.3.2"
   },
+  "overrides": {
+    "ansi-regex": ">=6.0.1",
+    "minimist": ">=1.2.6"
+  },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",
     "plugins": [
