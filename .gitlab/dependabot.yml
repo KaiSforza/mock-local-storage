@@ -3,3 +3,7 @@ updates:
   - package-ecosystem: npm
     directory: "/"
     schedule.interval: "daily"
+    assignees:
+      - KaiSforza
+    labels:
+      - dependabot
