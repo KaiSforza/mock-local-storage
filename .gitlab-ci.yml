@@ -3,6 +3,8 @@ include:
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
   - template: Security/License-Scanning.gitlab-ci.yml
+  - project: 'dependabot-gitlab/dependabot-standalone'
+    file: '.gitlab-ci.yml'
 
 variables:
   SAST_EXCLUDED_PATHS: 'spec, test, tests, tmp, lib, node_modules'
