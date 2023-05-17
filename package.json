@@ -1,6 +1,6 @@
 {
   "name": "mock-local-storage",
-  "version": "1.1.23",
+  "version": "1.1.24",
   "description": "Mock localStorage for headless unit tests",
   "main": "lib/mock-localstorage.js",
   "module": "src/mock-localstorage.js",
